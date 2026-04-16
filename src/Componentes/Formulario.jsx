@@ -13,6 +13,7 @@ function Formulario({ agregarCita }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("funciona");
     const nuevaCita = {
       id: Date.now(),
       mascota,
@@ -21,6 +22,7 @@ function Formulario({ agregarCita }) {
       hora,
       sintomas
     };
+    agregarCita(nuevaCita);
   };
 
   return (
@@ -33,8 +35,9 @@ function Formulario({ agregarCita }) {
         <Input label="Fecha" tipo="date" name="fecha" value={fecha} onChange={(e) => setFecha(e.target.value)} />
         <Input label="Hora" tipo="time" name="hora" value={hora} onChange={(e) => setHora(e.target.value)} />
         <Input label="Sintomas" tipo="textarea" name="sintomas" value={sintomas} onChange={(e) => setSintomas(e.target.value)} />
-
-        <Boton texto="Agregar Cita" tipo="submit" clase="u-full-width button-primary" />
+        <button type="submit" className="u-full-width button-primary">
+          Agregar Cita
+        </button>
       </form>
     </div>
   );
