@@ -2,18 +2,37 @@ import Input from "./Input";
 import Boton from "./Boton";
 import Titulo from "./Titulo.jsx";
 import "./Formulario.css";
+import { useState } from "react";
 
-function Formulario() {
+function Formulario({ agregarCita }) {
+  const [mascota, setMascota] = useState("");
+  const [dueno, setDueno] = useState("");
+  const [fecha, setFecha] = useState("");
+  const [hora, setHora] = useState("");
+  const [sintomas, setSintomas] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const nuevaCita = {
+      id: Date.now(),
+      mascota,
+      dueno,
+      fecha,
+      hora,
+      sintomas
+    };
+  };
+
   return (
     <div className="one-half column">
       <Titulo texto="Crear mi Cita" tipo="h2" />
 
-      <form>
-        <Input label="Nombre Mascota" name="mascota" />
-        <Input label="Nombre Dueño" name="dueno" />
-        <Input label="Fecha" tipo="date" name="fecha" />
-        <Input label="Hora" tipo="time" name="hora" />
-        <Input label="Sintomas" tipo="textarea" name="sintomas" />
+      <form onSubmit={handleSubmit}>
+        <Input label="Nombre Mascota" name="mascota" value={mascota} onChange={(e) => setMascota(e.target.value)} />
+        <Input label="Nombre Dueño" name="dueno" value={dueno} onChange={(e) => setDueno(e.target.value)} />
+        <Input label="Fecha" tipo="date" name="fecha" value={fecha} onChange={(e) => setFecha(e.target.value)} />
+        <Input label="Hora" tipo="time" name="hora" value={hora} onChange={(e) => setHora(e.target.value)} />
+        <Input label="Sintomas" tipo="textarea" name="sintomas" value={sintomas} onChange={(e) => setSintomas(e.target.value)} />
 
         <Boton texto="Agregar Cita" tipo="submit" clase="u-full-width button-primary" />
       </form>
